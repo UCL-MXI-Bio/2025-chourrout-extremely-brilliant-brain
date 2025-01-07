@@ -1,4 +1,4 @@
-# extremely-brilliant-brain
+# Extremely Brilliant Brain 🩻🧠✨
 Supplemental material for the release of the Extremely Brilliant Brain
 
 ## License
