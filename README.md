@@ -1,5 +1,5 @@
 # Extremely Brilliant Brain 🩻🧠✨
-Supplemental material for the release of the Extremely Brilliant Brain
+Supplementary material for the release of the Extremely Brilliant Brain
 
 ## License
 
