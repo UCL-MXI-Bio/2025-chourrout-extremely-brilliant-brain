@@ -84,7 +84,7 @@
     {
       "type": "segmentation",
       "source": {
-        "url": "gs://ucl-hip-ct-ebb-hseid5pvpp8vgtzt/derivatives/sub-01/ses-01/micr/494.08um_FastSurfer-segmentation.precomputed/|neuroglancer-precomputed:",
+        "url": "gs://ucl-hip-ct-ebb-hseid5pvpp8vgtzt/derivatives/sub-01/ses-01/micr/sub-01_ses-01_sample-brain_seg-freesurfer_res-494um_desc-FastSurfer_dseg.precomputed/|neuroglancer-precomputed:",
         "subsources": {
           "default": true,
           "properties": true,
