@@ -37,6 +37,17 @@ This **additional** interactive figure is related to the following figure from t
 
 > `Fig. 3` Segmentation of the anterior cerebral artery and of its branches. [...]
 
+## 🖼️ [Extremely Brilliant Brain, paired MRI and hippocampal subfields](https://neuroglancer-demo.appspot.com/#!https://raw.githubusercontent.com/UCL-MSM-Bio/2025-chourrout-extremely-brilliant-brain/refs/heads/main/interactive_figures/.neuroglancer_states/Extremely_Brilliant_Brain_paired_MRI_and_hippocampal_subfields.json)
+
+This interactive figure is associated with the following figure and caption from the manuscript:
+
+> `Fig. 4` Segmentation of the hippocampi. `a`, Hippocampal subfields determined from the paired MRI using HippUnfold. [...]
+
+This interactive figure is associated with the following **supplementary** figure and caption from the manuscript:
+
+> `Fig. Suppl. 4` Overlay of the HippUnfold U-Net output on the 3 T T2-weighted (in-plane resolution:
+> 0.255 mm; slice thickness: 0.257 mm). [...]
+
 ## 🖼️ [Extremely Brilliant Brain with deep brain and hippocampi](https://neuroglancer-demo.appspot.com/#!https://raw.githubusercontent.com/UCL-MSM-Bio/2025-chourrout-extremely-brilliant-brain/refs/heads/main/interactive_figures/.neuroglancer_states/Extremely_Brilliant_Brain_with_deep_brain_and_hippocampi.json)
 
 This **additional** interactive figure is related to the following figure from the manuscript:
