@@ -10,6 +10,16 @@ This interactive figure is associated with the following figure and caption from
 > `e`,`f`, Coronal slice of the “Extremely Brilliant Brain” dataset (`e`) and of its paired 3 T T2-weighted MRI (`f`). [...]
 > The grayscale of the T2-weighted MRI was inverted to match HiP-CT contrast.  [...]
 
+## 🖼️ [Extremely Brilliant Brain in the BigBrain space](https://atlases.ebrains.eu/viewer-staging/#/a:juelich:iav:atlas:v1.0.0:1/t:minds:core:referencespace:v1.0.0:a1655b99-82f1-420f-a3c2-fe80fd4c8588/p:juelich:iav:atlas:v1.0.0:4/@:0.0.0.-W000..2_kRye.2-HFsT.__G5P._J1ul..DMVW..nqCS.d0x_.1Mukg..pq_/vs:v2-ff011b03/x-overlay-layer:zarr:%2F%2Fgs:%2F%2Fucl-hip-ct-ebb-hseid5pvpp8vgtzt%2Fsub-01%2Fses-01%2Fmicr%2Fsub-01_ses-01_sample-brain_XPCT.ome.zarr)
+
+> [!NOTE]
+> This uses a different viewer, [Siibra](https://github.com/FZJ-INM1-BDA/siibra-explorer), developed by the Big Data Analytics Group, Institute of Neuroscience and Medicine (INM-1), Forschungszentrum Jülich GmbH.
+
+This interactive figure is associated with the following figure and caption from the manuscript:
+
+> `Fig. 2` Integration of the “Extremely Brilliant Brain” (EBB) into the BigBrain space using the Siibra viewer (EBRAINS).
+> The EBB cross-sections appear as yellow--red (white matter) and as green--blue (gray matter) in the BigBrain surface which is 3D-rendered in white.
+
 ## 🖼️ [Extremely Brilliant Brain with blood vessels and hemi](https://neuroglancer-demo.appspot.com/#!https://raw.githubusercontent.com/UCL-MSM-Bio/2025-chourrout-extremely-brilliant-brain/refs/heads/main/interactive_figures/.neuroglancer_states/Extremely_Brilliant_Brain_with_blood_vessels_and_hemi.json)
 
 This interactive figure is associated with the following figure and caption from the manuscript:
