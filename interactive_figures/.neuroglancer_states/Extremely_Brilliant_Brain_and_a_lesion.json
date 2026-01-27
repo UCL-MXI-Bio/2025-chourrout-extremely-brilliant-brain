@@ -1,0 +1,115 @@
+{
+  "title": "Extremely Brilliant Brain and a lesion",
+  "dimensions": {
+    "x": [
+      0.000007719999999999999,
+      "m"
+    ],
+    "y": [
+      0.000007719999999999999,
+      "m"
+    ],
+    "z": [
+      0.000007719999999999999,
+      "m"
+    ]
+  },
+  "position": [
+    5316.84326171875,
+    7972.6875,
+    14853.3486328125
+  ],
+  "crossSectionOrientation": [
+    -0.5,
+    0.5,
+    0.5,
+    0.5
+  ],
+  "crossSectionScale": 22.02072538860104,
+  "projectionOrientation": [
+    0.7799378037452698,
+    -0.47240743041038513,
+    0.26332414150238037,
+    0.31494224071502686
+  ],
+  "projectionScale": 38070.983614767596,
+  "layers": [
+    {
+      "type": "image",
+      "source": {
+        "url": "zarr://gs://ucl-hip-ct-ebb-hseid5pvpp8vgtzt/sub-01/ses-01/micr/sub-01_ses-01_sample-brain_XPCT.ome.zarr/",
+        "subsources": {
+          "default": true
+        },
+        "enableDefaultSubsources": false
+      },
+      "tab": "rendering",
+      "shaderControls": {
+        "normalized": {
+          "range": [
+            14329,
+            14500
+          ]
+        }
+      },
+      "crossSectionRenderScale": 0.5,
+      "volumeRendering": "max",
+      "name": "Extremely Brilliant Brain"
+    },
+    {
+      "type": "annotation",
+      "source": {
+        "url": "local://annotations",
+        "transform": {
+          "outputDimensions": {
+            "x": [
+              0.000007719999999999999,
+              "m"
+            ],
+            "y": [
+              0.000007719999999999999,
+              "m"
+            ],
+            "z": [
+              0.000007719999999999999,
+              "m"
+            ]
+          }
+        }
+      },
+      "tab": "annotations",
+      "annotationColor": "#ff0080",
+      "annotations": [
+        {
+          "pointA": [
+            4883.1728515625,
+            7504.86962890625,
+            14358.7666015625
+          ],
+          "pointB": [
+            5750.513671875,
+            8440.505859375,
+            15347.9306640625
+          ],
+          "type": "axis_aligned_bounding_box",
+          "id": "6bdf27f4495dc47ef8393ee23bb13e064dff9bf5"
+        }
+      ],
+      "name": "lesion"
+    }
+  ],
+  "showSlices": false,
+  "gpuMemoryLimit": 10000000000,
+  "systemMemoryLimit": 20000000000,
+  "concurrentDownloads": 150,
+  "selectedLayer": {
+    "size": 533,
+    "layer": "lesion"
+  },
+  "crossSectionBackgroundColor": "#000000",
+  "layout": "4panel-alt",
+  "selection": {
+    "size": 533,
+    "visible": false
+  }
+}
