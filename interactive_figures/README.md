@@ -82,3 +82,11 @@ This interactive figure is associated with the following **supplementary** figur
 > `Fig. Suppl. 5` Initial output from the FastSurfer segmentation algorithm on the binned “Extremely Brilliant Brain” (EBB) dataset (isotropic voxel size of 494.08 μm).
 > `a`, Coronal plane. `b`, Axial plane. `c`, Sagittal plane. `d`, 3D rendering of the labels. A few errors can be spotted within the segmentation.
 > The segmentation of the left hippocampus was then manually refined, as shown in `Fig. 4`. The colormap (or lookup table) is from the FreeSurfer software suite.
+
+## 🖼️ [Extremely Brilliant Brain and a brain lesion](https://neuroglancer-demo.appspot.com/#!https://raw.githubusercontent.com/UCL-MSM-Bio/2025-chourrout-extremely-brilliant-brain/refs/heads/main/interactive_figures/.neuroglancer_states/Extremely_Brilliant_Brain_and_a_lesion.json)
+
+This interactive figure is associated with the following **supplementary** figure and caption from the manuscript:
+
+> `Fig. Suppl. 6` Brain lesion discovered with HiP-CT in the “Extremely Brilliant Brain” (EBB) dataset.
+> `a`, `b`, `c`, Whole-brain views in the coronal plane (`a`), sagittal plane (`b`) and axial plane (`c`) to locate the lesion. `d`, `e`, `f`, Focus on the lesion in a small field of view in the coronal plane (`d`), sagittal plane (`e`) and axial plane (`f`)
+> This could be either a cavernoma or a multiloculated pyogenic cortical brain abscess.
