@@ -88,5 +88,5 @@ This interactive figure is associated with the following **supplementary** figur
 This interactive figure is associated with the following **supplementary** figure and caption from the manuscript:
 
 > `Fig. Suppl. 6` Brain lesion discovered with HiP-CT in the “Extremely Brilliant Brain” (EBB) dataset.
-> `a`, `b`, `c`, Whole-brain views in the coronal plane (`a`), sagittal plane (`b`) and axial plane (`c`) to locate the lesion. `d`, `e`, `f`, Focus on the lesion in a small field of view in the coronal plane (`d`), sagittal plane (`e`) and axial plane (`f`)
+> `a`, `b`, `c`, Whole-brain views in the coronal plane (`a`), sagittal plane (`b`) and axial plane (`c`) to locate the lesion. `d`, `e`, `f`, Focus on the lesion in a small field of view in the coronal plane (`d`), sagittal plane (`e`) and axial plane (`f`).
 > This could be either a cavernoma or a multiloculated pyogenic cortical brain abscess.
