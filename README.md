@@ -1,10 +1,15 @@
 # Extremely Brilliant Brain 🩻🧠✨
-Supplementary material for the release of the “Extremely Brilliant Brain”
+
+Supplementary material for the release of the “Extremely Brilliant Brain” (EBB), a 7.72 μm/voxel 3D volume of a whole adult human brain acquired using Hierarchical Phase-Contrast Tomography (HiP-CT)<sup>[see note]</sup>.
 
 ## Dataset
-The data can be downloaded from the BioImage Archive (BIA) following the Brain Imaging Data Structure (BIDS) specification: https://www.ebi.ac.uk/biostudies/bioimages/studies/S-BIAD1939
+The data (EBB & MRI) can be downloaded from the BioImage Archive (BIA)<sup>[see note]</sup> following the Brain Imaging Data Structure (BIDS) specification: https://www.ebi.ac.uk/biostudies/bioimages/studies/S-BIAD1939
 
-The data is also replicated on a Google Cloud Storage bucket for streaming to Neuroglancer (see below). Some files had to be converted to a format that is compatible with Neuroglancer, using the scripts that are provided.
+The EBB data itself can be downloaded from theHuman Organ Atlas (HOA)data portal<sup>[see note]</sup> as series of JPEG2000 files at different voxel sizes: https://human-organ-atlas.esrf.fr/datasets/2270234369
+
+
+
+The data is also replicated on a Google Cloud Storage<sup>[see note]</sup> bucket for streaming to Neuroglancer<sup>[see note]</sup>. Some files had to be converted to a format that is compatible with Neuroglancer, using the scripts that are provided.
 
 ## Interactive figures
 Interactive figures are available in the [subfolder](./interactive_figures/).
@@ -34,8 +39,10 @@ A copy of the license is available in the repository.
 <details>
 <summary>Notes</summary>
 
+> - Hierarchical Phase-Contrast Tomography (HiP-CT): https://mecheng.ucl.ac.uk/hip-ct/ | https://www.nature.com/articles/s41592-021-01317-x
 > - BioImage Archive: https://www.ebi.ac.uk/bioimage-archive/
 > - Brain Imaging Data Structure (BIDS): https://bids.neuroimaging.io/
+> - Human Organ Atlas (HOA): https://human-organ-atlas.esrf.fr/
 > - Google Cloud Storage: https://cloud.google.com/storage
 > - Neuroglancer: https://neuroglancer-docs.web.app/ | [https://github.com/google/neuroglancer](https://github.com/google/neuroglancer?tab=readme-ov-file#neuroglancer-web-based-volumetric-data-visualization)
 
