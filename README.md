@@ -2,6 +2,9 @@
 
 Supplementary material for the release of the “Extremely Brilliant Brain” (EBB), a 7.72 μm/voxel 3D volume of a whole adult human brain acquired using Hierarchical Phase-Contrast Tomography (HiP-CT)<sup>[see note]</sup>.
 
+## Preprint
+The associated manuscript is available as a preprint on bioRxiv: https://www.biorxiv.org/content/10.64898/2026.01.27.702076v1
+
 ## Dataset
 The data (EBB & MRI) can be downloaded from the BioImage Archive (BIA)<sup>[see note]</sup> following the Brain Imaging Data Structure (BIDS) specification<sup>[see note]</sup>: https://www.ebi.ac.uk/biostudies/bioimages/studies/S-BIAD1939
 
