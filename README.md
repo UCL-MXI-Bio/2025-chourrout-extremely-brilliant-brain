@@ -20,17 +20,20 @@ Interactive figures are available in the [subfolder](./interactive_figures/).
 ## Scripts
 The Python scripts are available in the [subfolder](./scripts/).
 
-Besides, this work has required the development of a few Python tools:
+Besides, this work has required the use of a few Python tools:
 
 | Repository                                                                                                 | Usecase                                                                                                                              |
 |------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
 | [`stack-to-chunk`](https://github.com/HiPCTProject/stack-to-chunk)                                         | Conversion of a series of 2D images to a 3D volume stored as an OME-Zarr                                                             |
 | [`ngregister`](https://github.com/HiPCTProject/ngregister)                                                 | Register with an affine transform using a set of hotkeys within Neuroglancer (optimal for large multiscale dataset)                  |
-| [`cardiotensor`](https://github.com/JosephBrunet/cardiotensor)                                             | Compute the structure tensor field in a 3D volume; *configuration file is available in the [subfolder](./scripts/)*
+| [`cardiotensor`](https://github.com/JosephBrunet/cardiotensor)                                             | Compute the structure tensor field in a 3D volume                                                                                    |
 | [`ngretrieve`](https://github.com/chourroutm/ngretrieve)                                                   | Download a crop of the dataset that can be picked with a Neuroglancer annotation layer                                               |
 | [`ngpointstobox`](https://github.com/chourroutm/ngpointstobox)                                             | Change a set of annotations into one annotation that is their bounding box in a Neuroglancer state                                   |
 | [`ngvolbox`](https://github.com/chourroutm/ngvolbox)                                                       | Replace a volume layer with an annotation layer that is its bounding box                                                             |
 | [`segment_properties_for_neuroglancer`](https://github.com/chourroutm/segment_properties_for_neuroglancer) | Generate the segmentation properties for the Neuroglancer precomputed format to add metrics and a colormap to the segmentation layer |
+| [`freesurfer`](https://github.com/freesurfer/freesurfer)                                                   | Suite of processing tools for 3D imaging data, initially focused on MRI and the NIfTI file format                                    |
+| [`FastSurfer`](https://github.com/Deep-MI/FastSurfer)                                                      | Deep learning-enabled segmentation toolbox                                                                                           |
+| [`hippunfold`](https://github.com/khanlab/hippunfold)                                                      | Hippocampus parcellation toolbox                                                                                                     |
 
 ## License
 
