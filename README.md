@@ -34,6 +34,7 @@ Besides, this work has required the use of a few Python tools:
 | [`freesurfer`](https://github.com/freesurfer/freesurfer)                                                   | Suite of processing tools for 3D imaging data, initially focused on MRI and the NIfTI file format                                    |
 | [`FastSurfer`](https://github.com/Deep-MI/FastSurfer)                                                      | Deep learning-enabled segmentation toolbox                                                                                           |
 | [`hippunfold`](https://github.com/khanlab/hippunfold)                                                      | Hippocampus parcellation toolbox                                                                                                     |
+| [`tiff_to_nifti`](https://github.com/chourroutm/tiff_to_nifti) | Convert a TIFF file to a NIfTI file with the necessary header |
 
 ## License
 
