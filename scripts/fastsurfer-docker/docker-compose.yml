@@ -1,0 +1,25 @@
+services:
+  fastsurfer:
+    image: deepmi/fastsurfer:latest
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    volumes:
+      - ./input:/data
+      - ./output:/output
+      - ./fs_license:/fs_license
+    command: [
+      "--fs_license", "/fs_license/license.txt",
+      "--t1", "/data/494um_EBB.nii.gz",
+      "--sid", "494um_EBB",
+      "--sd", "/output",
+      "--parallel",
+      "--3T"
+    ]
+    user: "1000:1000" # edit with your own
+    restart: "no"
