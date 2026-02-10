@@ -25,13 +25,13 @@ The demo code is meant to run on any computer by using a smaller demo crop from 
 ## Installation Guide
 
 ### Installation Instructions
-The preferred method to run the scripts is to use the new environment manager, `uv` (https://docs.astral.sh/uv/). To install `uv` in a local account (this does not require admin access), run the _standalone installer_ from their website: https://docs.astral.sh/uv/getting-started/installation/#standalone-installer
-
+As portions of the code interact together, it is recommended to download the whole repository:
 ```bash
-# Example
 git clone https://github.com/UCL-MXI-Bio/2025-chourrout-extremely-brilliant-brain
 cd 2025-chourrout-extremely-brilliant-brain/scripts/
 ````
+
+The preferred method to run the Python scripts is to use the new environment manager, `uv` (https://docs.astral.sh/uv/). To install `uv` in a local account (this does not require admin access), run the _standalone installer_ from their website: https://docs.astral.sh/uv/getting-started/installation/#standalone-installer
 
 ### Typical Install Time
 
@@ -50,11 +50,12 @@ cd 2025-chourrout-extremely-brilliant-brain/scripts/
 
 * Description of the expected output:
 
-  * Output formats: either TIFF, NIfTI or .npy (NumPy array); the [precomputed Neuroglancer format](https://github.com/google/neuroglancer/tree/master/src/datasource/precomputed) is specifically meant for Neuroglancer
+  * Output formats: either TIFF, NIfTI, .npy (NumPy array) or the [precomputed Neuroglancer format](https://github.com/google/neuroglancer/tree/master/src/datasource/precomputed)
   * Visualizations: 
     * TIFF and NIfTI files can be opened with [Fiji](https://fiji.sc)
     * NIfTI files can be opened with [FreeSurfer](https://freesurfer.net)
     * .npy (NumPy array) files can be opened with [napari](https://napari.org/stable/)
+    * the [precomputed Neuroglancer format](https://github.com/google/neuroglancer/tree/master/src/datasource/precomputed) is specifically meant for Neuroglancer
 
 ### Expected Runtime
 
@@ -78,18 +79,3 @@ source .venv/bin/activate
 uv pip install -r requirements.txt
 python run.py
 ```
-
-### Configuration Options
-
-* Description of key parameters and flags
-* Default values and recommended settings
-
-### Notes and Best Practices
-
-* Performance considerations
-* Common pitfalls
-* Troubleshooting tips
-
-
-## Setup for most scripts
-
