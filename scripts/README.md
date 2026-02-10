@@ -80,6 +80,141 @@ uv pip install -r requirements.txt
 python run.py
 ```
 
-## Detailed input/output per script
+## Detailed input/output and description per script
 
+<details>
+<summary><code>cardiotensor/run.py</code></summary>
 
+- Inputs:
+  - configuration file `cardiotensor_*.conf`
+  - series of 2D images (sometimes referred to as a stack of slices) from the same 3D volume `slice_0*.tif`
+- Description: compute the struture tensor of the image intensity gradient to determine 3D orientations of the structures in the image
+- Outputs:
+  - series of 2D vector maps `slice_0*.npy` (matching each input 2D image)
+
+</details>
+
+<details>
+<summary><code>cardiotensor/run.py</code></summary>
+
+- Inputs:
+  - configuration file `cardiotensor_*.conf`
+  - series of 2D images (sometimes referred to as a stack of slices) from the same 3D volume `slice_0*.tif`
+- Description: compute the struture tensor of the image intensity gradient to determine 3D orientations of the structures in the image
+- Outputs:
+  - series of 2D vector maps `slice_0*.npy` (matching each input 2D image)
+
+</details>
+
+<details>
+<summary><code>converters/convert_16bit_to_32bit_nifti.py</code></summary>
+
+- Inputs:
+  - NIfTI file as 16-bit unsigned integer data type
+- Description: cast a 16-bit unsigned integer data type NIfTI file into a 32-bit floating point data type NIfTI file while preserving the header and affine transform
+- Outputs:
+  - NIfTI file as 32-bit floating point data type
+
+</details>
+
+<details>
+<summary><code>converters/convert_brain_mask.py</code></summary>
+
+- Inputs:
+  - binary TIFF file with the background set as 0 and the brain (including a safety margin to keep the meningeal blood vessels) as 1
+- Description: convert a binary TIFF file of the appropriate dimensions into a Neuroglancer precomputed volume format data source for rendering into Neuroglancer, including meshes
+- Outputs:
+  - Neuroglancer precomputed volume format data source including meshes for rendering into Neuroglancer
+
+</details>
+
+<details>
+<summary><code>converters/convert_orientation_slice.py</code></summary>
+
+- Inputs:
+  - 2D vector map `slice_0*.npy` from running the structure tensor
+  - resampled binary TIFF file with the background set as 0 and the brain (including a safety margin to keep the meningeal blood vessels) as 1
+- Description: convert a 2D vector field into a red-green-blue-opacity (RGBA) Neuroglancer precomputed volume format data source for rendering into Neuroglancer
+- Outputs:
+  - Neuroglancer precomputed volume format data source as RGBA for rendering into Neuroglancer
+
+</details>
+
+<details>
+<summary><code>converters/convert_parcellation.py</code></summary>
+
+- Inputs:
+  - NIfTI 3D volume of the segmentation of EBB as a whole brain
+- Description: convert a 3D segmentation into a Neuroglancer precomputed volume format data source for rendering into Neuroglancer
+- Outputs:
+  - Neuroglancer precomputed volume format data source as labels for rendering into Neuroglancer
+
+</details>
+
+<details>
+<summary><code>downloaders/extract_downsampled_data.py</code></summary>
+
+- Inputs:
+  - none
+- Description: download a pre-determined downsampled version of the EBB dataset
+- Outputs:
+  - NIfTI file of the downsampled version of the EBB dataset
+
+</details>
+
+<details>
+<summary><code>downloaders/extract_slab_as_tiff_stack.py</code></summary>
+
+- Inputs:
+  - none
+- Description: download a pre-determined region of interest of the EBB dataset at full resolution
+- Outputs:
+  - series of 2D images (sometimes referred to as a stack of slices) from the same 3D volume `slice_0*.tif`
+
+</details>
+
+<details>
+<summary><code>downloaders/download_mri.sh</code> & <code>downloaders/download_masked_mri.sh</code></summary>
+
+- Inputs:
+  - none
+- Description: download the original (resp. masked) version of the 3T T2-weighted MRI
+- Outputs:
+  - NIfTI file of the original (resp. masked) 3T T2-weighted MRI into the `data` folder
+
+</details>  
+
+<details>
+<summary><code>fastsurfer-docker/run.sh</code></summary>
+
+- Inputs:
+  - RAS-reoriented NIfTI file with max. 320 voxels per dimension
+  - `docker-compose.yml` file for the Docker container
+  - FreeSurfer license as `license.txt`
+- Description: compute the parcellation of the brain using the deep-learning-enabled FastSurfer
+- Outputs:
+  - NIfTI 3D volume of the segmentation of EBB as a whole brain
+
+</details>
+
+<details>
+<summary><code>hippunfold-docker/prepare_folder_structure_with_mri.sh</code></summary>
+
+- Inputs:
+  - NIfTI file of the original 3T T2-weighted MRI into the `data/` folder
+- Description: create the folder structure as BIDS for HippUnfold
+- Outputs:
+  - folder structure as BIDS for the original 3T T2-weighted MRI into the `data/ebb-mri_as_bids/` folder
+
+</details>
+
+<details>
+<summary><code>hippunfold-docker/prepare_folder_structure_with_mri.sh</code></summary>
+
+- Inputs:
+  - folder structure as BIDS for the original 3T T2-weighted MRI into the `data/ebb-mri_as_bids/` folder
+- Description: compute the parcellation of the hippocampi using the deep-learning-enabled HippUnfold
+- Outputs:
+  - series of NIfTI 3D volumes of the parcellation of the hippocampi in EBB
+
+</details>
