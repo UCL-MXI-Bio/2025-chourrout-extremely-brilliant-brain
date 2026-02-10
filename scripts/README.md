@@ -14,7 +14,7 @@ Each individual Python script has its own dependencies. E.g. for `cardiotensor/r
 ### Tested Versions
 - Versions and environments the software has been tested on:
   - OS: Ubuntu 20.04 LTS, Ubuntu 22.04 LTS
-  - Dependency versions: use the relevant `*_requirements.txt` file
+  - Dependency versions: use the relevant `requirements.txt` file
   - Compiler/runtime versions: gcc 9.4.0, gcc 11.4.0
 
 ### Hardware Requirements
