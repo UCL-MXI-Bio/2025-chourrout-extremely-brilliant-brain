@@ -79,3 +79,7 @@ source .venv/bin/activate
 uv pip install -r requirements.txt
 python run.py
 ```
+
+## Detailed input/output per script
+
+
