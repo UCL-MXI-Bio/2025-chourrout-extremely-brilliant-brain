@@ -1,0 +1,1 @@
+Request a free FreeSurfer license on this [webpage](https://surfer.nmr.mgh.harvard.edu/registration.html) and place the file in this folder as "license.txt"
