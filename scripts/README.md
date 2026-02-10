@@ -209,7 +209,7 @@ python run.py
 </details>
 
 <details>
-<summary><code>hippunfold-docker/prepare_folder_structure_with_mri.sh</code></summary>
+<summary><code>hippunfold-docker/run.sh</code></summary>
 
 - Inputs:
   - folder structure as BIDS for the original 3T T2-weighted MRI into the `data/ebb-mri_as_bids/` folder
