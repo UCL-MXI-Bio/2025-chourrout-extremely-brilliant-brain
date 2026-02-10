@@ -6,6 +6,8 @@ import os
 import subprocess
 import pathlib
 
+RUN_DEMO = True
+
 # ------------------------
 # Tests
 
@@ -14,15 +16,14 @@ try:
 except ImportError:
   raise Exception("Please install cardiotensor")
 
-if not pathlib.Path("./cardiotensor.conf").exists():
-  raise Exception("Please download cardiotensor.conf")
+CONFIG_FILE = "cardiotensor_(full_resolution).conf"
+if RUN_DEMO:
+  CONFIG_FILE = "cardiotensor_(demo_data).conf"
 
-# Note: make sure to edit the path in the cardiotensor.conf file
+if not pathlib.Path(CONFIG_FILE).exists():
+  raise Exception("Please download {}")
 
-# ------------------------
-# Run cardiotensor
-
-subprocess.run(['cardio-tensor','cardiotensor.conf'])
+subprocess.run(['cardio-tensor',CONFIG_FILE])
 
 # ------------------------
 # Post-processing

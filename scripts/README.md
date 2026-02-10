@@ -3,7 +3,7 @@
 ## System Requirements
 
 ### Software Dependencies
-Each individual Python script has its own dependencies. E.g. for `run_cardiotensor.py`, install the dependencies listed in the `cardiotensor_requirements.txt`.
+Each individual Python script has its own dependencies. E.g. for `cardiotensor/run.py`, install the dependencies listed in the `cardiotensor/requirements.txt` file.
 
 ### Operating Systems
 - Supported operating systems (with versions):
@@ -25,60 +25,58 @@ The demo code is meant to run on any computer by using a smaller demo crop from 
 ## Installation Guide
 
 ### Installation Instructions
-1. Step-by-step installation instructions
-2. Environment setup (e.g., virtual environments, containers)
-3. Configuration steps (if any)
+The preferred method to run the scripts is to use the new environment manager, `uv` (https://docs.astral.sh/uv/). To install `uv` in a local account (this does not require admin access), run the _standalone installer_ from their website: https://docs.astral.sh/uv/getting-started/installation/#standalone-installer
 
 ```bash
 # Example
-git clone <repository-url>
-cd <repository>
-pip install -r requirements.txt
+git clone https://github.com/UCL-MXI-Bio/2025-chourrout-extremely-brilliant-brain
+cd 2025-chourrout-extremely-brilliant-brain/scripts/
 ````
 
 ### Typical Install Time
 
 * Approximate installation time on a “normal” desktop computer:
 
-  * Example: 5–10 minutes
+  * 5–10 minutes
 
 ## Demo
 
 ### Instructions to Run the Demo
 
-1. Navigate to the demo directory
-2. Run the demo command on the provided sample data
-
-```bash
-# Example
-python run_demo.py --input data/sample_input.csv
-```
+- Each script can be run with the included `demo_data`.
+- Modify the path to make sure to point to the `demo_data` folder.
 
 ### Expected Output
 
 * Description of the expected output:
 
-  * Output files generated (names and formats)
-  * Console/log output
-  * Visualizations or reports (if any)
+  * Output formats: either TIFF, NIfTI or .npy (NumPy array); the [precomputed Neuroglancer format](https://github.com/google/neuroglancer/tree/master/src/datasource/precomputed) is specifically meant for Neuroglancer
+  * Visualizations: 
+    * TIFF and NIfTI files can be opened with [Fiji](https://fiji.sc)
+    * NIfTI files can be opened with [FreeSurfer](https://freesurfer.net)
+    * .npy (NumPy array) files can be opened with [napari](https://napari.org/stable/)
 
 ### Expected Runtime
 
 * Approximate runtime on a “normal” desktop computer:
 
-  * Example: ~30 seconds
+  * 60 seconds
 
 ## Instructions for Use
 
 ### Running the Software on Your Own Data
 
 1. Prepare your input data according to the required format
+2. Start the virtual environment specific to the folder (e.g. using `uv`)
 2. Specify input/output paths and configuration options
 3. Execute the main command
 
 ```bash
 # Example
-python run.py --input <your_data> --output <output_directory>
+uv venv
+source .venv/bin/activate
+uv pip install -r requirements.txt
+python run.py
 ```
 
 ### Configuration Options
@@ -95,34 +93,3 @@ python run.py --input <your_data> --output <output_directory>
 
 ## Setup for most scripts
 
-The preferred method to run the scripts is to use the new environment manager, `uv` (https://docs.astral.sh/uv/). To install `uv` in a local account (this does not require admin access), run the _standalone installer_ from their website: https://docs.astral.sh/uv/getting-started/installation/#standalone-installer
-
-- On Mac, Linux or WSL, create an environment with:
-
-```bash
-uv venv
-```
-
-- Activate it with:
-
-```bash
-source .venv/bin/activate
-```
-
-- Install dependencies with:
-
-```bash
-uv pip install package-name
-```
-
-## Setup for `run_*.py` scripts
-
-These scripts may require more steps because they use another software to run the analysis. Make sure to install the software separately and verify that it works on its own before using the `run_*.py` script.
-
-## Running a script
-
-Once the environment is activated and the dependencies installed, run:
-
-```bash
-python script_name.py
-```
