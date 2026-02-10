@@ -95,18 +95,6 @@ python run.py
 </details>
 
 <details>
-<summary><code>cardiotensor/run.py</code></summary>
-
-- Inputs:
-  - configuration file `cardiotensor_*.conf`
-  - series of 2D images (sometimes referred to as a stack of slices) from the same 3D volume `slice_0*.tif`
-- Description: compute the struture tensor of the image intensity gradient to determine 3D orientations of the structures in the image
-- Outputs:
-  - series of 2D vector maps `slice_0*.npy` (matching each input 2D image)
-
-</details>
-
-<details>
 <summary><code>converters/convert_16bit_to_32bit_nifti.py</code></summary>
 
 - Inputs:
