@@ -1,5 +1,5 @@
 {
-  "title": "Extremely Brilliant Brain with zoom on blood vessels",
+  "title": "HiP-CT brain with zoom on blood vessels",
   "dimensions": {
     "x": [
       0.000007719999999999999,
@@ -55,7 +55,7 @@
       },
       "crossSectionRenderScale": 4.783493096176566,
       "volumeRendering": "max",
-      "name": "Extremely Brilliant Brain",
+      "name": "HiP-CT brain",
       "visible": false
     },
     {

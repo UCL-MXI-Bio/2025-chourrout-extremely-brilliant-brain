@@ -2,11 +2,9 @@ import numpy as np
 import tifffile as tiff
 from pathlib import Path
 import configparser
-import os
+import inquirer
 import subprocess
 import pathlib
-
-RUN_DEMO = True
 
 # ------------------------
 # Tests
@@ -16,9 +14,11 @@ try:
 except ImportError:
   raise Exception("Please install cardiotensor")
 
-CONFIG_FILE = "cardiotensor_(full_resolution).conf"
-if RUN_DEMO:
-  CONFIG_FILE = "cardiotensor_(demo_data).conf"
+run_demo = inquirer.confirm(
+  "Run on the demo data instead of the full-resolution dataset?",
+  default=True,
+)
+CONFIG_FILE = "cardiotensor_(demo_data).conf" if run_demo else "cardiotensor_(full_resolution).conf"
 
 if not pathlib.Path(CONFIG_FILE).exists():
   raise Exception("Please download {}")

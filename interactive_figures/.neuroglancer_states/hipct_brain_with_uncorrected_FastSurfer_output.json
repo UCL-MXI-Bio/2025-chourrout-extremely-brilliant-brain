@@ -1,5 +1,5 @@
 {
-  "title": "Extremely Brilliant Brain with 2D view of blood vessels",
+  "title": "HiP-CT brain with uncorrected FastSurfer output",
   "dimensions": {
     "x": [
       0.000007719999999999999,
@@ -15,51 +15,88 @@
     ]
   },
   "position": [
-    14417.5,
-    7875.5,
-    10045.5
+    10412.5244140625,
+    5026.03271484375,
+    10428.1962890625
   ],
   "crossSectionOrientation": [
-    0.6331450343132019,
-    -0.7739729285240173,
-    0.007798727136105299,
-    0.005695846863090992
+    0.7071067690849304,
+    -0.7071067690849304,
+    0,
+    0
   ],
-  "crossSectionScale": 2.8576511819366415,
+  "crossSectionScale": 57.397668393782396,
   "projectionOrientation": [
-    0.6780185699462891,
-    -0.7321663498878479,
-    0.0018537536961957812,
-    0.06496068835258484
+    -0.7905328869819641,
+    0.6099225878715515,
+    -0.028838923200964928,
+    -0.04712258651852608
   ],
-  "projectionScale": 1895.4426640602617,
+  "projectionScale": 25906.735751295342,
   "layers": [
     {
       "type": "image",
-      "source": "zarr://gs://ucl-hip-ct-ebb-hseid5pvpp8vgtzt/sub-01/ses-01/micr/sub-01_ses-01_sample-brain_XPCT.ome.zarr/",
+      "source": {
+        "url": "zarr://gs://ucl-hip-ct-ebb-hseid5pvpp8vgtzt/sub-01/ses-01/micr/sub-01_ses-01_sample-brain_XPCT.ome.zarr/",
+        "subsources": {
+          "default": true
+        },
+        "enableDefaultSubsources": false
+      },
       "tab": "rendering",
       "opacity": 1,
       "shaderControls": {
         "normalized": {
           "range": [
-            14357,
-            14485
-          ],
-          "window": [
-            14112,
-            14651
+            14329,
+            14500
           ]
         }
       },
-      "crossSectionRenderScale": 0.0625,
+      "crossSectionRenderScale": 4.783493096176566,
       "volumeRendering": "max",
-      "volumeRenderingDepthSamples": 2,
-      "name": "Extremely Brilliant Brain"
+      "name": "HiP-CT brain"
     },
     {
       "type": "segmentation",
       "source": {
-        "url": "gs://ucl-hip-ct-ebb-hseid5pvpp8vgtzt/derivatives/sub-01/ses-01/micr/sub-01_ses-01_sample-brain_res-7um_desc-bloodvessels_mask.precomputed/|neuroglancer-precomputed:",
+        "url": "gs://ucl-hip-ct-ebb-hseid5pvpp8vgtzt/derivatives/sub-01/ses-01/micr/sub-01_ses-01_sample-brain_res-123um_desc-enlarged1mm_mask.precomputed/|neuroglancer-precomputed:",
+        "transform": {
+          "matrix": [
+            [
+              -1,
+              0,
+              0,
+              18704
+            ],
+            [
+              0,
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              0
+            ]
+          ],
+          "outputDimensions": {
+            "x": [
+              0.000007719999999999999,
+              "m"
+            ],
+            "y": [
+              0.000007719999999999999,
+              "m"
+            ],
+            "z": [
+              0.000007719999999999999,
+              "m"
+            ]
+          }
+        },
         "subsources": {
           "default": true,
           "mesh": true
@@ -67,19 +104,15 @@
         "enableDefaultSubsources": false
       },
       "tab": "source",
-      "selectedAlpha": 1,
-      "notSelectedAlpha": 1,
-      "baseSegmentColoring": true,
-      "meshSilhouetteRendering": 0.3,
-      "meshRenderScale": 0.0625,
-      "crossSectionRenderScale": 0.2110006208334461,
+      "meshSilhouetteRendering": 2.1,
       "segments": [
-        "1",
-        "!0"
+        "0",
+        "1"
       ],
       "segmentQuery": "1",
-      "segmentDefaultColor": "#ff0000",
-      "name": "Traced vessels"
+      "segmentDefaultColor": "#ffffff",
+      "name": "Brain mask",
+      "visible": false
     },
     {
       "type": "segmentation",
@@ -93,9 +126,9 @@
         "enableDefaultSubsources": false
       },
       "tab": "source",
-      "selectedAlpha": 1,
+      "selectedAlpha": 0.64,
       "notSelectedAlpha": 0.31,
-      "objectAlpha": 0.15,
+      "meshRenderScale": 0.5689108535472178,
       "crossSectionRenderScale": 1.0457341482224871,
       "segments": [
         "15",
@@ -291,23 +324,22 @@
         "2034": "#9696c8",
         "2035": "#ffc020"
       },
-      "name": "FastSurfer segmentation (no corrections)",
-      "visible": false
+      "name": "FastSurfer segmentation (no corrections)"
     }
   ],
   "showAxisLines": false,
+  "showSlices": false,
   "hideCrossSectionBackground3D": true,
-  "gpuMemoryLimit": 100000000000,
-  "systemMemoryLimit": 100000000000,
   "concurrentDownloads": 150,
   "selectedLayer": {
     "size": 660,
-    "layer": "Traced vessels"
+    "visible": true,
+    "layer": "FastSurfer segmentation (no corrections)"
   },
   "crossSectionBackgroundColor": "#000000",
-  "layout": "xy-3d",
-  "helpPanel": {
-    "size": 691
+  "layout": {
+    "type": "4panel-alt",
+    "orthographicProjection": true
   },
   "settingsPanel": {
     "size": 691

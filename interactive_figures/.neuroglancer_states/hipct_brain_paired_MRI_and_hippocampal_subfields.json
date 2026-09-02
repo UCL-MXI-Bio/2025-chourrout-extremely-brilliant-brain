@@ -1,5 +1,5 @@
 {
-  "title": "Extremely Brilliant Brain, paired MRI and hippocampal subfields",
+  "title": "HiP-CT brain, paired MRI and hippocampal subfields",
   "dimensions": {
     "x": [
       0.000007719999999999999,
@@ -54,7 +54,7 @@
       },
       "crossSectionRenderScale": 4.783493096176566,
       "volumeRendering": "max",
-      "name": "Extremely Brilliant Brain",
+      "name": "HiP-CT brain",
       "visible": false
     },
     {

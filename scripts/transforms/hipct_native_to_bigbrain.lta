@@ -1,0 +1,50 @@
+# LTA file created by NiTransforms
+type      = 1
+nxforms   = 1
+mean      = 0.0000 0.0000 0.0000
+sigma     = 1.0000
+1 4 4
+2.856858444846659e-02 -2.550887471520653e-01 1.192354246855992e+00 6.975227791022688e+01
+9.996773699319879e-01 1.406810832743737e-02 -2.117825657430985e-02 7.223747037500624e+01
+-9.271405310698325e-03 1.055015014139638e+00 2.082332652834197e-01 7.621486258091835e+01
+0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00 1.000000000000000e+00
+src volume info
+valid = 0  # volume info invalid
+filename = 
+volume = 0 0 0
+voxelsize = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+xras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+yras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+zras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+cras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+dst volume info
+valid = 0  # volume info invalid
+filename =
+volume = 0 0 0
+voxelsize = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+xras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+yras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+zras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+cras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+# NOTE: this file is written and must be read via nitransforms
+# (nitransforms.linear.load(path, fmt='fs').matrix), not FreeSurfer's own LTA
+# tools -- nitransforms stores LTAs using FreeSurfer's "points convention",
+# so the raw matrix numbers above are NOT the intended physical transform
+# directly; only round-tripping through nitransforms' reader/writer gives
+# back the correct matrix.
+# Maps HiP-CT brain native physical space (mm, corner-origin: voxel (0,0,0) -> RAS
+# (0,0,0), any pyramid level) to the BigBrain (2015 Release) scene RAS used by
+# the siibra/EBRAINS viewer.
+# CORRECTED 2026-09-01: this is the decoded Voluba/siibra JSON transform
+# matrix (see BigBrain-EBB_registration_notes.md), applied DIRECTLY -- no
+# axis permutation, no row reassignment. Earlier versions of this file
+# applied a column swap (compensating for an assumed OME-Zarr (z,y,x) axis
+# order) and an empirically-fit row reassignment (R=d0,A=d2,S=d1); both were
+# dropped once the real OME-NGFF .zattrs confirmed the axes are actually
+# (x,y,z), matching NIfTI's own (i,j,k) directly, making the permutation (and
+# the row fit that was only compensating for it) unnecessary. Verified: the
+# raw JSON 3x3 has det=+0.763 (no reflection), and applying this matrix to
+# 494.08um_EBB.nii.gz's own native header, composed with
+# BIGBRAIN_MICROSCOPIC_TEMPLATE_HISTOLOGY.nii.gz's own real ras2vox, visually
+# matches the template in freeview (confirmed by the user) -- see
+# BigBrain-EBB_registration_notes.md for the full resolution writeup.

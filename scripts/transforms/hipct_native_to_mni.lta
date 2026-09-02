@@ -1,0 +1,49 @@
+# LTA file created by NiTransforms
+type      = 1
+nxforms   = 1
+mean      = 0.0000 0.0000 0.0000
+sigma     = 1.0000
+1 4 4
+-7.237408104505375e-02 -2.667944395833797e-01 7.773035053004371e-01 6.089071895186290e+01
+-9.395318257036218e-01 5.332194840010782e-03 -5.463321400441455e-02 7.281653364763559e+01
+-1.955932759219016e-02 8.955332375693885e-01 3.116017385888277e-01 9.486654434948957e+01
+0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00 1.000000000000000e+00
+src volume info
+valid = 0  # volume info invalid
+filename = 
+volume = 0 0 0
+voxelsize = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+xras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+yras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+zras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+cras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+dst volume info
+valid = 0  # volume info invalid
+filename =
+volume = 0 0 0
+voxelsize = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+xras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+yras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+zras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+cras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+# NOTE: this file is written and must be read via nitransforms
+# (nitransforms.linear.load(path, fmt='fs').matrix), not FreeSurfer's own LTA
+# tools -- nitransforms stores LTAs using FreeSurfer's "points convention",
+# so the raw matrix numbers above are NOT the intended physical transform
+# directly; only round-tripping through nitransforms' reader/writer gives
+# back the correct matrix.
+# Maps HiP-CT brain native physical space (mm, corner-origin: voxel (0,0,0) -> RAS
+# (0,0,0), any pyramid level) to true MNI RAS.
+# CORRECTED 2026-08-31 (third pass): extracted directly from the real NIfTI
+# sform headers of 494.08um_EBB.nii.gz (source, raw/untransformed -- its own
+# sform is exactly the corner-origin diag(0.49408mm) convention used
+# elsewhere as native_affine(6), so no further conversion is needed to make
+# this level-agnostic) and
+# reg_EBB_to_EBBMRI_in_MNI/494.08um_EBB.prealigned-mni.moved.nii.gz (target,
+# nominally in the same MNI-registered frame as the approved
+# reg_EBBMRI_to_MNI/0.5mm_EBB-MRI.moved.nii.gz). Matrix = dst.affine @
+# inv(src.affine).
+# NOTE: det(3x3) = -1.359 -- this transform includes a reflection. This is
+# expected, not a bug: it is inherited from EBB_to_T2_in_MNI_prealigned.lta
+# (in reg_EBB, det=-1.158), the coarse manual pre-alignment that produced the
+# "mov" input to nitorch_register_EBB_to_MNI_via_EBB-MRI.sh.

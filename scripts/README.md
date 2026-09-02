@@ -69,8 +69,8 @@ The preferred method to run the Python scripts is to use the new environment man
 
 1. Prepare your input data according to the required format
 2. Start the virtual environment specific to the folder (e.g. using `uv`)
-2. Specify input/output paths and configuration options
-3. Execute the main command
+2. Execute the main command
+3. Most scripts prompt interactively for any choices, paths, or configuration options (using [`inquirer`](https://pypi.org/project/inquirer/)); scripts that download data will show the estimated download size and ask for confirmation before proceeding
 
 ```bash
 # Example
@@ -106,69 +106,45 @@ python run.py
 </details>
 
 <details>
-<summary><code>converters/convert_brain_mask.py</code></summary>
+<summary><code>converters/convert_to_neuroglancer.py</code></summary>
 
-- Inputs:
-  - binary TIFF file with the background set as 0 and the brain (including a safety margin to keep the meningeal blood vessels) as 1
-- Description: convert a binary TIFF file of the appropriate dimensions into a Neuroglancer precomputed volume format data source for rendering into Neuroglancer, including meshes
+Interactive CLI (prompts for which conversion to run, then the input/output paths): merges what used to be three separate scripts (`convert_brain_mask.py`, `convert_orientation_slice.py`, `convert_parcellation.py`).
+
+- Inputs (selected via an interactive prompt):
+  - **Brain mask**: binary TIFF file with the background set as 0 and the brain (including a safety margin to keep the meningeal blood vessels) as 1
+  - **Orientation vectors**: 2D vector map `slice_0*.npy` from running the structure tensor (output of `cardiotensor/run.py`), as an RGBA TIFF
+  - **Parcellation**: NIfTI 3D volume of the segmentation of the HiP-CT brain as a whole brain, as a TIFF
+- Description: convert the selected input into a Neuroglancer precomputed volume format data source for rendering into Neuroglancer (brain mask additionally generates downsampled mips and meshes)
 - Outputs:
-  - Neuroglancer precomputed volume format data source including meshes for rendering into Neuroglancer
+  - Neuroglancer precomputed volume format data source (segmentation + meshes, RGBA image, or labels, depending on the selected conversion)
 
 </details>
 
 <details>
-<summary><code>converters/convert_orientation_slice.py</code></summary>
+<summary><code>downloaders/download_hipct_data.py</code></summary>
+
+Interactive CLI: merges what used to be two separate scripts (`extract_downsampled_data.py`, `extract_slab_as_tiff_stack.py`). Prompts for which download to run, the relevant parameters (pyramid downscaling level, or region-of-interest corners), and confirms before downloading (showing the estimated download size).
 
 - Inputs:
-  - 2D vector map `slice_0*.npy` from running the structure tensor
-  - resampled binary TIFF file with the background set as 0 and the brain (including a safety margin to keep the meningeal blood vessels) as 1
-- Description: convert a 2D vector field into a red-green-blue-opacity (RGBA) Neuroglancer precomputed volume format data source for rendering into Neuroglancer
+  - none (parameters are entered interactively; sensible defaults are offered)
+  - the transform files in `../transforms/*.lta` (used only by the downsampled-volume path, see below)
+- Description: download HiP-CT brain data from its Google Cloud Storage OME-Zarr, either as a downsampled whole-brain volume or as a full-resolution region-of-interest crop
 - Outputs:
-  - Neuroglancer precomputed volume format data source as RGBA for rendering into Neuroglancer
+  - **Downsampled whole-brain volume**: NIfTI file of the downsampled HiP-CT brain dataset, with the correct physical voxel size for the selected pyramid level (read from the dataset's own OME-NGFF metadata, not assumed). Also prompts for which space to align it to &mdash; native HiP-CT brain space (no alignment, corner-origin), MNI space, native MRI space, or BigBrain space &mdash; by composing the level's voxel-to-physical scale with a level-agnostic physical-space transform read from `../transforms/*.lta` (see that folder's files for how each was derived; the BigBrain one is best-effort and not yet fully verified, see `BigBrain-EBB_registration_notes.md` in the `reg_EBB` working folder)
+  - **Region of interest**: series of 2D images (sometimes referred to as a stack of slices) from the same 3D volume `slice_0*.tif`
 
 </details>
 
 <details>
-<summary><code>converters/convert_parcellation.py</code></summary>
+<summary><code>downloaders/download_mri.py</code></summary>
+
+Interactive CLI: merges what used to be two separate scripts (`download_mri.sh`, `download_masked_mri.sh`). Prompts for which MRI to download and confirms before downloading (showing the download size).
 
 - Inputs:
-  - NIfTI 3D volume of the segmentation of EBB as a whole brain
-- Description: convert a 3D segmentation into a Neuroglancer precomputed volume format data source for rendering into Neuroglancer
+  - none (selection and output path are entered interactively)
+- Description: download the original or masked version of the 3T T2-weighted MRI
 - Outputs:
-  - Neuroglancer precomputed volume format data source as labels for rendering into Neuroglancer
-
-</details>
-
-<details>
-<summary><code>downloaders/extract_downsampled_data.py</code></summary>
-
-- Inputs:
-  - none
-- Description: download a pre-determined downsampled version of the EBB dataset
-- Outputs:
-  - NIfTI file of the downsampled version of the EBB dataset
-
-</details>
-
-<details>
-<summary><code>downloaders/extract_slab_as_tiff_stack.py</code></summary>
-
-- Inputs:
-  - none
-- Description: download a pre-determined region of interest of the EBB dataset at full resolution
-- Outputs:
-  - series of 2D images (sometimes referred to as a stack of slices) from the same 3D volume `slice_0*.tif`
-
-</details>
-
-<details>
-<summary><code>downloaders/download_mri.sh</code> & <code>downloaders/download_masked_mri.sh</code></summary>
-
-- Inputs:
-  - none
-- Description: download the original (resp. masked) version of the 3T T2-weighted MRI
-- Outputs:
-  - NIfTI file of the original (resp. masked) 3T T2-weighted MRI into the `data` folder
+  - NIfTI file of the selected 3T T2-weighted MRI into the `data` folder
 
 </details>  
 
@@ -181,7 +157,7 @@ python run.py
   - FreeSurfer license as `license.txt`
 - Description: compute the parcellation of the brain using the deep-learning-enabled FastSurfer
 - Outputs:
-  - NIfTI 3D volume of the segmentation of EBB as a whole brain
+  - NIfTI 3D volume of the segmentation of the HiP-CT brain as a whole brain
 
 </details>
 
@@ -192,7 +168,7 @@ python run.py
   - NIfTI file of the original 3T T2-weighted MRI into the `data/` folder
 - Description: create the folder structure as BIDS for HippUnfold
 - Outputs:
-  - folder structure as BIDS for the original 3T T2-weighted MRI into the `data/ebb-mri_as_bids/` folder
+  - folder structure as BIDS for the original 3T T2-weighted MRI into the `data/mri_as_bids/` folder
 
 </details>
 
@@ -200,9 +176,9 @@ python run.py
 <summary><code>hippunfold-docker/run.sh</code></summary>
 
 - Inputs:
-  - folder structure as BIDS for the original 3T T2-weighted MRI into the `data/ebb-mri_as_bids/` folder
+  - folder structure as BIDS for the original 3T T2-weighted MRI into the `data/mri_as_bids/` folder
 - Description: compute the parcellation of the hippocampi using the deep-learning-enabled HippUnfold
 - Outputs:
-  - series of NIfTI 3D volumes of the parcellation of the hippocampi in EBB
+  - series of NIfTI 3D volumes of the parcellation of the hippocampi in the HiP-CT brain
 
 </details>

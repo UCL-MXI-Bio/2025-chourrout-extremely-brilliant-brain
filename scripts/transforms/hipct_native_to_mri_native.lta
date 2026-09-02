@@ -1,0 +1,42 @@
+# LTA file created by NiTransforms
+type      = 1
+nxforms   = 1
+mean      = 0.0000 0.0000 0.0000
+sigma     = 1.0000
+1 4 4
+-7.419237866214892e-02 -2.292151805447308e-01 9.918665986804066e-01 6.927611773859037e+01
+-9.923022079502274e-01 -4.807092217449395e-02 -9.364567978917915e-02 7.343875192932964e+01
+-6.839970893804120e-02 9.719220069510728e-01 2.216848935192372e-01 8.210051811659667e+01
+0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00 1.000000000000000e+00
+src volume info
+valid = 0  # volume info invalid
+filename = 
+volume = 0 0 0
+voxelsize = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+xras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+yras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+zras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+cras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+dst volume info
+valid = 0  # volume info invalid
+filename =
+volume = 0 0 0
+voxelsize = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+xras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+yras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+zras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+cras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+# NOTE: this file is written and must be read via nitransforms
+# (nitransforms.linear.load(path, fmt='fs').matrix), not FreeSurfer's own LTA
+# tools -- nitransforms stores LTAs using FreeSurfer's "points convention",
+# so the raw matrix numbers above are NOT the intended physical transform
+# directly; only round-tripping through nitransforms' reader/writer gives
+# back the correct matrix.
+# Maps HiP-CT brain native physical space (mm, corner-origin: voxel (0,0,0) -> RAS
+# (0,0,0), any pyramid level) to the raw EBB-MRI (0.5mm_EBB-MRI.nii.gz) scan's
+# own native RAS.
+# RECOMPOSED 2026-08-31 (third pass): inv(mri_native_to_mni.lta) @
+# hipct_native_to_mni.lta, using both files' current (corrected) matrices.
+# NOTE: det(3x3) = -0.983 -- this transform includes a reflection, inherited
+# from hipct_native_to_mni.lta (expected, not a bug -- see that file's
+# comments).

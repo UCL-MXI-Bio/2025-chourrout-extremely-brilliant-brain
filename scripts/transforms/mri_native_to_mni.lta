@@ -1,0 +1,43 @@
+# LTA file created by NiTransforms
+type      = 1
+nxforms   = 1
+mean      = 0.0000 0.0000 0.0000
+sigma     = 1.0000
+1 4 4
+9.439170400000000e-01 -4.509472500000001e-02 -2.806900399999999e-02 4.152315299999998e-01
+4.449768700000001e-02 9.312650000000002e-01 1.333309000000000e-01 1.432993400000000e+01
+7.921339999999999e-03 -5.714483600000000e-02 8.123899700000001e-01 -5.111526000000000e+00
+0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00 1.000000000000000e+00
+src volume info
+valid = 0  # volume info invalid
+filename = 
+volume = 0 0 0
+voxelsize = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+xras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+yras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+zras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+cras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+dst volume info
+valid = 0  # volume info invalid
+filename =
+volume = 0 0 0
+voxelsize = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+xras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+yras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+zras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+cras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+# NOTE: this file is written and must be read via nitransforms
+# (nitransforms.linear.load(path, fmt='fs').matrix), not FreeSurfer's own LTA
+# tools -- nitransforms stores LTAs using FreeSurfer's "points convention",
+# so the raw matrix numbers above are NOT the intended physical transform
+# directly; only round-tripping through nitransforms' reader/writer gives
+# back the correct matrix.
+# Maps the raw EBB-MRI scan's (0.5mm_EBB-MRI.nii.gz) own native RAS to true
+# MNI RAS. Equal to the plain inverse of reg_EBBMRI_to_MNI/affine.lta's matrix
+# -- NOT squared. Verified empirically: reg_EBBMRI_to_MNI/0.5mm_EBB-MRI.moved.nii.gz's
+# own vox2ras equals inv(affine.lta) @ (0.5mm_EBB-MRI.nii.gz's vox2ras) to
+# float32 precision (~1e-5 max abs diff on the full matrix). An earlier
+# version of this file assumed affine.lta needed squaring (since
+# nitorch_register_EBB-MRI_to_MNI.sh runs "@affine affine -g", a symmetric
+# registration) -- that assumption was wrong; empirically only a single
+# inversion is needed to reproduce the real moved.nii.gz header exactly.
