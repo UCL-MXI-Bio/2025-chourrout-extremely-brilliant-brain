@@ -130,8 +130,20 @@ Interactive CLI: merges what used to be two separate scripts (`extract_downsampl
   - the transform files in `../transforms/*.lta` (used only by the downsampled-volume path, see below)
 - Description: download HiP-CT brain data from its Google Cloud Storage OME-Zarr, either as a downsampled whole-brain volume or as a full-resolution region-of-interest crop
 - Outputs:
-  - **Downsampled whole-brain volume**: NIfTI file of the downsampled HiP-CT brain dataset, with the correct physical voxel size for the selected pyramid level (read from the dataset's own OME-NGFF metadata, not assumed). Also prompts for which space to align it to &mdash; native HiP-CT brain space (no alignment, corner-origin), MNI space, native MRI space, or BigBrain space &mdash; by composing the level's voxel-to-physical scale with a level-agnostic physical-space transform read from `../transforms/*.lta` (see that folder's files for how each was derived; the BigBrain one is best-effort and not yet fully verified)
+  - **Downsampled whole-brain volume**: NIfTI file of the downsampled HiP-CT brain dataset, with the correct physical voxel size for the selected pyramid level (read from the dataset's own OME-NGFF metadata, not assumed), named following BIDS conventions (`sub-01_ses-01_sample-brain_res-<level>um[_space-<target>]_XPCT.nii.gz`). Also prompts for which space to align it to &mdash; native HiP-CT brain space (no alignment, corner-origin), MNI space, native MRI space, BigBrain space, or FastSurfer input space &mdash; by composing the level's voxel-to-physical scale with a level-agnostic physical-space transform read from `../transforms/*.lta` (see that folder's files for how each was derived and validated; the BigBrain one is best-effort and not yet fully verified). If FastSurfer input space is selected, also prompts whether to crop any axis over FastSurfer's 320-voxel-per-axis limit (a pure index crop, translation-adjusted, no resampling)
   - **Region of interest**: series of 2D images (sometimes referred to as a stack of slices) from the same 3D volume `slice_0*.tif`
+
+</details>
+
+<details>
+<summary><code>converters/apply_transform.py</code></summary>
+
+- Inputs:
+  - NIfTI file whose header expresses one of the known spaces (native HiP-CT brain space, MNI space, native MRI space, or BigBrain space)
+  - the transform files in `../transforms/*.lta`
+- Description: rewrite a NIfTI file's affine header to express it in a different one of those spaces (interactively selected), composing or inverting the stored `.lta` files as needed; does not resample the voxel data, only the header
+- Outputs:
+  - the same NIfTI data with a new affine header, in the target space
 
 </details>
 
