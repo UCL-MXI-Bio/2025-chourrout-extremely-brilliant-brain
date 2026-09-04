@@ -1,1 +1,1 @@
-The high-resolution data will be downloaded here.
+The data will be downloaded here.
