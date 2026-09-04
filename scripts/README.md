@@ -43,8 +43,8 @@ The preferred method to run the Python scripts is to use the new environment man
 
 ### Instructions to Run the Demo
 
-- Each script can be run with the included `demo_data`.
-- Modify the path to make sure to point to the `demo_data` folder.
+- Each script can be run with the included `data`.
+- Modify the path to make sure to point to the `data` folder.
 
 ### Expected Output
 
@@ -130,7 +130,7 @@ Interactive CLI: merges what used to be two separate scripts (`extract_downsampl
   - the transform files in `../transforms/*.lta` (used only by the downsampled-volume path, see below)
 - Description: download HiP-CT brain data from its Google Cloud Storage OME-Zarr, either as a downsampled whole-brain volume or as a full-resolution region-of-interest crop
 - Outputs:
-  - **Downsampled whole-brain volume**: NIfTI file of the downsampled HiP-CT brain dataset, with the correct physical voxel size for the selected pyramid level (read from the dataset's own OME-NGFF metadata, not assumed). Also prompts for which space to align it to &mdash; native HiP-CT brain space (no alignment, corner-origin), MNI space, native MRI space, or BigBrain space &mdash; by composing the level's voxel-to-physical scale with a level-agnostic physical-space transform read from `../transforms/*.lta` (see that folder's files for how each was derived; the BigBrain one is best-effort and not yet fully verified, see `BigBrain-EBB_registration_notes.md` in the `reg_EBB` working folder)
+  - **Downsampled whole-brain volume**: NIfTI file of the downsampled HiP-CT brain dataset, with the correct physical voxel size for the selected pyramid level (read from the dataset's own OME-NGFF metadata, not assumed). Also prompts for which space to align it to &mdash; native HiP-CT brain space (no alignment, corner-origin), MNI space, native MRI space, or BigBrain space &mdash; by composing the level's voxel-to-physical scale with a level-agnostic physical-space transform read from `../transforms/*.lta` (see that folder's files for how each was derived; the BigBrain one is best-effort and not yet fully verified)
   - **Region of interest**: series of 2D images (sometimes referred to as a stack of slices) from the same 3D volume `slice_0*.tif`
 
 </details>

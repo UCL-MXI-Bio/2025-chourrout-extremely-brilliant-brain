@@ -10,13 +10,13 @@ services:
               count: all
               capabilities: [gpu]
     volumes:
-      - ../demo_data:/data
+      - ../data:/data
       - ./output:/output
       - ./fs_license:/fs_license
     command: [
       "--fs_license", "/fs_license/license.txt", # provide your own license
-      "--t1", "/data/downsampled_data_float32_rotated_crop.nii.gz",
-      "--sid", "494um_EBB",
+      "--t1", "/data/sub-01_ses-01_sample-brain_res-494um_space-FSInput_XPCT.nii.gz",
+      "--sid", "sub-01",
       "--sd", "/output",
       "--parallel",
       "--3T"

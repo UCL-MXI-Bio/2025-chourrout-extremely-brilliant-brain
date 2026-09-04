@@ -49,6 +49,7 @@ ALIGNMENT_TARGETS = {
     "MNI space": "hipct_native_to_mni.lta",
     "Native MRI space": "hipct_native_to_mri_native.lta",
     "BigBrain space": "hipct_native_to_bigbrain.lta",
+    "FastSurfer input space": "hipct_native_to_fastsurfer_input.lta",
 }
 
 PHYSICAL_ALIGNMENT_CHAINS = {
@@ -56,11 +57,61 @@ PHYSICAL_ALIGNMENT_CHAINS = {
     for name, filename in ALIGNMENT_TARGETS.items()
 }
 
+# BIDS `space-<label>` entity values for each alignment target (labels must be
+# alphanumeric, no dashes/underscores). "Native HiP-CT brain space (no
+# alignment)" has no entry -- the space- entity is simply omitted for that
+# case, per BIDS convention for data in its own acquisition space.
+SPACE_LABELS = {
+    "MNI space": "MNI",
+    "Native MRI space": "T2w",
+    "BigBrain space": "BigBrain",
+    "FastSurfer input space": "FSInput",
+}
+
+
+def bids_filename(level, alignment=None, desc=None, suffix="XPCT", ext=".nii.gz"):
+    """BIDS-style filename for a downloaded/derived HiP-CT volume, consistent
+    with this dataset's own source naming (sub-01_ses-01_sample-brain_XPCT.ome.zarr,
+    see PATH_TO_DATA_IN_GCS_BUCKET) and with download_mri.py's output names
+    (sub-01_ses-02_T2w.nii.gz, sub-01_ses-02_desc-masked_T2w.nii.gz)."""
+    entities = ["sub-01", "ses-01", "sample-brain"]
+    if level is not None:
+        entities.append(f"res-{round(LEVEL_VOXEL_SIZE_UM[level])}um")
+    if alignment is not None and alignment in SPACE_LABELS:
+        entities.append(f"space-{SPACE_LABELS[alignment]}")
+    if desc is not None:
+        entities.append(f"desc-{desc}")
+    return "_".join(entities) + f"_{suffix}{ext}"
+
+
+# FastSurfer's bounding-box limit (see scripts/README.md's note on
+# fastsurfer-docker/run.sh's input requirements).
+FASTSURFER_MAX_DIM = 320
+
+
+def crop_to_fastsurfer_limit(data, affine):
+    """Symmetrically crop any axis exceeding FASTSURFER_MAX_DIM voxels down to
+    exactly that size, adjusting the affine's translation to match (a pure
+    index crop, no resampling -- physical space and voxel size are
+    unaffected). Matches the constraint FastSurfer's docker run.sh imposes on
+    its --t1 input."""
+    affine = affine.copy()
+    slices = []
+    for axis, size in enumerate(data.shape):
+        if size > FASTSURFER_MAX_DIM:
+            excess = size - FASTSURFER_MAX_DIM
+            lo = excess // 2
+            hi = lo + FASTSURFER_MAX_DIM
+            slices.append(slice(lo, hi))
+            affine[:3, 3] += affine[:3, axis] * lo
+        else:
+            slices.append(slice(None))
+    return data[tuple(slices)], affine
+
 
 def native_affine(level):
     """Corner-origin voxel-index -> native HiP-CT brain physical RAS(mm) affine at the
-    given pyramid level, matching reg_EBB/494.08um_EBB.nii.gz's own convention
-    (voxel (0,0,0) -> RAS (0,0,0))."""
+    given pyramid level (voxel (0,0,0) -> RAS (0,0,0))."""
     voxel_size_mm = LEVEL_VOXEL_SIZE_UM[level] * 1e-3
     return np.diag([voxel_size_mm, voxel_size_mm, voxel_size_mm, 1.0])
 
@@ -96,7 +147,7 @@ def download_downsampled_volume():
 
     output_path = Path(inquirer.text(
         "Output NIfTI path",
-        default=f"../demo_data/hipct_brain_level{downscaling}.nii.gz",
+        default=f"../data/{bids_filename(downscaling, alignment)}",
     ))
 
     # Catch a compatibility issue of FreeSurfer with the 16-bit unsigned integer
@@ -110,6 +161,13 @@ def download_downsampled_volume():
         nifti_affine = native_affine(downscaling)
     else:
         nifti_affine = align_affine(alignment, downscaling)
+
+    if alignment == "FastSurfer input space" and inquirer.confirm(
+        f"FastSurfer has a {FASTSURFER_MAX_DIM}-voxel-per-axis input limit "
+        f"(current shape {computed.shape}). Apply the crop?",
+        default=True,
+    ):
+        computed, nifti_affine = crop_to_fastsurfer_limit(computed, nifti_affine)
 
     nifti_header = nibabel.Nifti1Header()
     nifti_header.set_data_dtype(computed.dtype)
@@ -145,7 +203,7 @@ def download_roi_slab():
     size_gb = data_slab.nbytes / (1024 ** 3)
     output_path = Path(inquirer.text(
         "Output directory for the TIFF stack",
-        default="../data/hipct_brain_slab_as_tiff_stack",
+        default=f"../data/{bids_filename(level=0, desc='roi', ext='')}",
     ))
 
     if not inquirer.confirm(

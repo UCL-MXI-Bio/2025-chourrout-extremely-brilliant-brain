@@ -4,9 +4,9 @@ nxforms   = 1
 mean      = 0.0000 0.0000 0.0000
 sigma     = 1.0000
 1 4 4
-9.439170400000000e-01 -4.509472500000001e-02 -2.806900399999999e-02 4.152315299999998e-01
-4.449768700000001e-02 9.312650000000002e-01 1.333309000000000e-01 1.432993400000000e+01
-7.921339999999999e-03 -5.714483600000000e-02 8.123899700000001e-01 -5.111526000000000e+00
+-1.946204247360583e-05 2.577725681476295e-04 1.000000000000000e+00 1.547899741116520e+02
+-1.000000000000000e+00 6.046802809578368e-05 -1.947762939380482e-05 6.174977362092863e-01
+6.047304850653746e-05 1.000000000000000e+00 -2.577713748905808e-04 1.106122228019544e+01
 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00 1.000000000000000e+00
 src volume info
 valid = 0  # volume info invalid
@@ -32,12 +32,12 @@ cras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
 # so the raw matrix numbers above are NOT the intended physical transform
 # directly; only round-tripping through nitransforms' reader/writer gives
 # back the correct matrix.
-# Maps the raw paired T2w MRI scan's own native RAS to true MNI RAS. Equal to
-# the plain inverse of the MRI-to-MNI registration's own affine matrix --
-# NOT squared. Verified empirically: the registration's moved output's own
-# vox2ras equals inv(affine) @ (the raw MRI's own vox2ras) to float32
-# precision (~1e-5 max abs diff on the full matrix). An earlier version of
-# this file assumed the affine needed squaring (since the underlying nitorch
-# registration runs a symmetric "@affine affine -g" registration) -- that
-# assumption was wrong; empirically only a single inversion is needed to
-# reproduce the real moved-volume header exactly.
+# Maps HiP-CT brain native physical space (mm, corner-origin: voxel (0,0,0) ->
+# RAS (0,0,0), any pyramid level) to the physical RAS space of the actual
+# FastSurfer T1 input, supplied by a colleague.
+# UPDATED 2026-09-04 (sixth pass): fifth pass got axes and L-R mirroring
+# right; user asked for a manual nudge of exactly one native voxel
+# (-0.49408mm, the 494.08um pyramid level's voxel size) on all three RAS
+# components on top of that -- translation column -= 0.49408 uniformly,
+# rotation/reflection part unchanged from the fifth pass.
+# det(3x3) = -1.0 (unchanged -- pure translation nudge, no rotation change).

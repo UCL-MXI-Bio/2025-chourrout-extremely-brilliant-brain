@@ -36,15 +36,14 @@ cras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
 # (0,0,0), any pyramid level) to the BigBrain (2015 Release) scene RAS used by
 # the siibra/EBRAINS viewer.
 # CORRECTED 2026-09-01: this is the decoded Voluba/siibra JSON transform
-# matrix (see BigBrain-EBB_registration_notes.md), applied DIRECTLY -- no
-# axis permutation, no row reassignment. Earlier versions of this file
-# applied a column swap (compensating for an assumed OME-Zarr (z,y,x) axis
-# order) and an empirically-fit row reassignment (R=d0,A=d2,S=d1); both were
-# dropped once the real OME-NGFF .zattrs confirmed the axes are actually
-# (x,y,z), matching NIfTI's own (i,j,k) directly, making the permutation (and
-# the row fit that was only compensating for it) unnecessary. Verified: the
-# raw JSON 3x3 has det=+0.763 (no reflection), and applying this matrix to
-# 494.08um_EBB.nii.gz's own native header, composed with
-# BIGBRAIN_MICROSCOPIC_TEMPLATE_HISTOLOGY.nii.gz's own real ras2vox, visually
-# matches the template in freeview (confirmed by the user) -- see
-# BigBrain-EBB_registration_notes.md for the full resolution writeup.
+# matrix, applied DIRECTLY -- no axis permutation, no row reassignment.
+# Earlier versions of this file applied a column swap (compensating for an
+# assumed OME-Zarr (z,y,x) axis order) and an empirically-fit row
+# reassignment (R=d0,A=d2,S=d1); both were dropped once the real OME-NGFF
+# .zattrs confirmed the axes are actually (x,y,z), matching NIfTI's own
+# (i,j,k) directly, making the permutation (and the row fit that was only
+# compensating for it) unnecessary. Verified: the raw JSON 3x3 has det=+0.763
+# (no reflection), and applying this matrix to the raw native sample
+# volume's own native header, composed with the BigBrain microscopic
+# histology template's own real ras2vox, visually matches the template in
+# freeview (confirmed by the user).

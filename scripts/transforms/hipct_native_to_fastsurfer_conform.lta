@@ -1,0 +1,58 @@
+# LTA file created by NiTransforms
+type      = 1
+nxforms   = 1
+mean      = 0.0000 0.0000 0.0000
+sigma     = 1.0000
+1 4 4
+-9.999595277107008e-01 -0.000000000000000e+00 -0.000000000000000e+00 8.772769626383512e+00
+-0.000000000000000e+00 -0.000000000000000e+00 -9.999595277107008e-01 1.053096109974686e+00
+0.000000000000000e+00 9.999595277107008e-01 0.000000000000000e+00 8.834504188290213e+00
+0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00 1.000000000000000e+00
+src volume info
+valid = 0  # volume info invalid
+filename = 
+volume = 0 0 0
+voxelsize = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+xras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+yras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+zras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+cras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+dst volume info
+valid = 0  # volume info invalid
+filename =
+volume = 0 0 0
+voxelsize = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+xras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+yras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+zras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+cras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
+# NOTE: this file is written and must be read via nitransforms
+# (nitransforms.linear.load(path, fmt='fs').matrix), not FreeSurfer's own LTA
+# tools -- nitransforms stores LTAs using FreeSurfer's "points convention",
+# so the raw matrix numbers above are NOT the intended physical transform
+# directly; only round-tripping through nitransforms' reader/writer gives
+# back the correct matrix.
+# Maps HiP-CT brain native physical space (mm, corner-origin: voxel (0,0,0) ->
+# RAS (0,0,0), any pyramid level) to the physical RAS space of the raw
+# FastSurfer segmentation output, still on FreeSurfer's own internal 320^3
+# conform grid (LIA-handed storage order), supplied by a colleague alongside
+# the real T1 input file.
+# CREATED 2026-09-04: Matrix = (raw FastSurfer segmentation output)'s affine @
+# inv(raw native sample volume's affine). Both real headers, no data-identity
+# check needed (see hipct_native_to_fastsurfer_input.lta for that reasoning).
+# det(3x3) = -1.0001 -- a clean signed axis permutation WITH a reflection
+# (unlike hipct_native_to_fastsurfer_input.lta's det=+1), consistent with
+# FreeSurfer's internal conform grid being left-handed (LIA) vs RAS's
+# right-handed convention. The ~0.004% deviation from exactly +/-1 is just
+# that file's header being rounded to 4 decimal places (0.4941 instead of
+# 0.49408), not a real rotation component.
+# Provenance (confirmed by the user + verified numerically): raw FastSurfer
+# output (this file's dst space, 320^3, 96 labels) -> resampled onto the T1
+# input file's grid (identical rotation to that file, zero interpolation
+# needed for the reorientation itself) -> padded into a larger canvas,
+# offset by an exact integer voxel shift of (4, 18, 20), to produce
+# sub-01_ses-01_sample-brain_seg-freesurfer_res-494um_desc-FastSurfer_dseg.nii.gz
+# (same 96-label set, confirming the lineage). So dseg's own native-space
+# transform is identical to hipct_native_to_fastsurfer_input.lta's, just
+# evaluated on a canvas offset by that known (4,18,20) voxel pad -- no
+# separate dseg-specific transform file is needed.

@@ -4,9 +4,9 @@ nxforms   = 1
 mean      = 0.0000 0.0000 0.0000
 sigma     = 1.0000
 1 4 4
--7.237408104505375e-02 -2.667944395833797e-01 7.773035053004371e-01 6.089071895186290e+01
--9.395318257036218e-01 5.332194840010782e-03 -5.463321400441455e-02 7.281653364763559e+01
--1.955932759219016e-02 8.955332375693885e-01 3.116017385888277e-01 9.486654434948957e+01
+-7.495136663471288e-02 -2.621482478898525e-01 7.814543562549315e-01 6.101684243039888e+01
+-9.448508467003577e-01 6.523386649224552e-03 -5.479741151142448e-02 7.289797062253922e+01
+-1.752229737679297e-02 9.030492243586699e-01 3.086132881194044e-01 9.495131343974029e+01
 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00 1.000000000000000e+00
 src volume info
 valid = 0  # volume info invalid
@@ -34,16 +34,21 @@ cras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
 # back the correct matrix.
 # Maps HiP-CT brain native physical space (mm, corner-origin: voxel (0,0,0) -> RAS
 # (0,0,0), any pyramid level) to true MNI RAS.
-# CORRECTED 2026-08-31 (third pass): extracted directly from the real NIfTI
-# sform headers of 494.08um_EBB.nii.gz (source, raw/untransformed -- its own
-# sform is exactly the corner-origin diag(0.49408mm) convention used
-# elsewhere as native_affine(6), so no further conversion is needed to make
-# this level-agnostic) and
-# reg_EBB_to_EBBMRI_in_MNI/494.08um_EBB.prealigned-mni.moved.nii.gz (target,
-# nominally in the same MNI-registered frame as the approved
-# reg_EBBMRI_to_MNI/0.5mm_EBB-MRI.moved.nii.gz). Matrix = dst.affine @
-# inv(src.affine).
-# NOTE: det(3x3) = -1.359 -- this transform includes a reflection. This is
-# expected, not a bug: it is inherited from EBB_to_T2_in_MNI_prealigned.lta
-# (in reg_EBB, det=-1.158), the coarse manual pre-alignment that produced the
-# "mov" input to nitorch_register_EBB_to_MNI_via_EBB-MRI.sh.
+# UPDATED 2026-09-04: extracted the same way as the previous (2026-08-31)
+# version -- Matrix = dst.affine @ inv(src.affine), src = the raw native
+# sample volume's own identity/corner-origin header -- but with dst now
+# pointing at the just-completed inverted-contrast nitorch registration run
+# (finest pyramid level, "=== all levels complete ===").
+# This works because nitorch's "Minimal reslice" never resamples the voxel
+# array -- it only updates the NIfTI header's affine to bake in each new
+# correction on top of the previous one -- so this level_0 moved file's own
+# shape is still exactly (293,293,337), identical to raw native's, and its
+# header already has the *entire* chain (prealign -> first-pass correction ->
+# this run's two-level affine refinement) composed into it.
+# Verified before overwriting: recomputing the OLD (2026-08-31) matrix with
+# this same formula (dst = the earlier registration pass's own moved output)
+# reproduced the previous file's matrix to ~4.6e-6 max abs diff (float32
+# rounding only) -- confirms the derivation method is unchanged, only the
+# input registration result is newer/more refined.
+# det(3x3) = -1.338 -- still includes a reflection, same as before (inherited
+# from the manual coarse pre-alignment step this whole chain builds on).

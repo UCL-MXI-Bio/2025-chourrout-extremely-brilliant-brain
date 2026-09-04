@@ -5,7 +5,7 @@ from cloudvolume import CloudVolume
 from cloudvolume.lib import mkdir
 from pathlib import Path
 
-EBB_RESOLUTION_NM = 7720
+NATIVE_RESOLUTION_NM = 7720
 
 CONVERSION_TYPES = {
     "Brain mask (segmentation, with meshing)": "brain_mask",
@@ -14,10 +14,10 @@ CONVERSION_TYPES = {
 }
 
 DEFAULT_INPUT = {
-    "brain_mask": "input/dilated_whole_brain_123umEBB_16102024.tif",
+    "brain_mask": "input/dilated_whole_brain_123um_16102024.tif",
     # The file below is the output from the cardiotensor/run.py script
     "orientation_slice": "input/vectors_rgba_sigma3_rho6_slice-10774.tif",
-    "parcellation": "input/494um_EBB_fastsurfer.tif",
+    "parcellation": "input/494um_fastsurfer.tif",
 }
 
 DEFAULT_OUTPUT = {
@@ -41,7 +41,7 @@ def convert_brain_mask(image_filename, output_dir):
     output_dir_uri = output_dir.absolute().as_uri() + "/"
     print(output_dir_uri)
 
-    binned_resolution_nm = EBB_RESOLUTION_NM * 16
+    binned_resolution_nm = NATIVE_RESOLUTION_NM * 16
 
     # Create a CloudVolume object for the Neuroglancer precomputed format
     info = CloudVolume.create_new_info(
@@ -123,7 +123,7 @@ def convert_orientation_slice(image_filename, output_dir):
         layer_type = 'image', # 'image' or 'segmentation'
         data_type = 'uint8', # can pick any popular uint
         encoding = 'raw', # see: https://github.com/seung-lab/cloud-volume/wiki/Compression-Choices
-        resolution = [ EBB_RESOLUTION_NM ] * 3, # X,Y,Z values in nanometers
+        resolution = [ NATIVE_RESOLUTION_NM ] * 3, # X,Y,Z values in nanometers
         voxel_offset = [ 1441, 1113, 10774 ], # values X,Y,Z values in voxels
         chunk_size = [ 2048, 2048, 1 ], # rechunk of image X,Y,Z in voxels
         volume_size =  data_to_write.shape[:-1], # X,Y,Z size in voxels

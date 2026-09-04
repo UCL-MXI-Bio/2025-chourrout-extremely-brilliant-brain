@@ -38,7 +38,7 @@ def find_transform(origin, target):
 def main():
     input_path = Path(inquirer.text(
         "Path to the input NIfTI file",
-        default="../demo_data/hipct_brain_level6.nii.gz",
+        default="../data/sub-01_ses-01_sample-brain_res-494um_XPCT.nii.gz",
     ))
 
     origin_space = inquirer.list_input(

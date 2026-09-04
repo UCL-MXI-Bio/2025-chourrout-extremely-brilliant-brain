@@ -4,11 +4,11 @@ import numpy
 
 input_path = inquirer.text(
     "Path to the input 16-bit unsigned integer NIfTI file",
-    default="../demo_data/downsampled_data_uint16.nii.gz",
+    default="../data/sub-01_ses-01_sample-brain_res-494um_XPCT.nii.gz",
 )
 output_path = inquirer.text(
     "Path to the output 32-bit floating point NIfTI file",
-    default="../demo_data/downsampled_data_float32.nii.gz",
+    default="../data/sub-01_ses-01_sample-brain_res-494um_desc-float32_XPCT.nii.gz",
 )
 
 n16 = nibabel.load(input_path)

@@ -4,9 +4,9 @@ nxforms   = 1
 mean      = 0.0000 0.0000 0.0000
 sigma     = 1.0000
 1 4 4
--7.419237866214892e-02 -2.292151805447308e-01 9.918665986804066e-01 6.927611773859037e+01
--9.923022079502274e-01 -4.807092217449395e-02 -9.364567978917915e-02 7.343875192932964e+01
--6.839970893804120e-02 9.719220069510728e-01 2.216848935192372e-01 8.210051811659667e+01
+-7.719816588970718e-02 -2.241158204276902e-01 9.960352810583467e-01 6.935172219108361e+01
+-9.979783510720087e-01 -4.710087280811848e-02 -9.420311790391966e-02 7.350579489718859e+01
+-6.657093630409158e-02 9.797802796328495e-01 2.167798026886362e-01 8.204684792597995e+01
 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00 1.000000000000000e+00
 src volume info
 valid = 0  # volume info invalid
@@ -33,10 +33,11 @@ cras   = 0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00
 # directly; only round-tripping through nitransforms' reader/writer gives
 # back the correct matrix.
 # Maps HiP-CT brain native physical space (mm, corner-origin: voxel (0,0,0) -> RAS
-# (0,0,0), any pyramid level) to the raw EBB-MRI (0.5mm_EBB-MRI.nii.gz) scan's
-# own native RAS.
-# RECOMPOSED 2026-08-31 (third pass): inv(mri_native_to_mni.lta) @
-# hipct_native_to_mni.lta, using both files' current (corrected) matrices.
-# NOTE: det(3x3) = -0.983 -- this transform includes a reflection, inherited
+# (0,0,0), any pyramid level) to the raw paired T2w MRI scan's own native RAS.
+# RECOMPOSED 2026-09-04 (fourth pass): inv(mri_native_to_mni.lta) @
+# hipct_native_to_mni.lta, using mri_native_to_mni.lta unchanged and the
+# 2026-09-04 hipct_native_to_mni.lta (derived from the completed
+# inverted-contrast run, job 21898321 -- see that file's own comments).
+# NOTE: det(3x3) = -0.968 -- this transform includes a reflection, inherited
 # from hipct_native_to_mni.lta (expected, not a bug -- see that file's
 # comments).
