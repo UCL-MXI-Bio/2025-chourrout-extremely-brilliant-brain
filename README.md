@@ -1,6 +1,6 @@
 # The 7.72 μm Brain 🩻🧠✨
 
-Supplementary material for the release of a 7.72 μm/voxel 3D volume of a whole adult human brain acquired using Hierarchical Phase-Contrast Tomography (HiP-CT)<sup>[see note]</sup>.
+Supplementary material for the release of a 7.72 μm/voxel image of a whole adult human brain acquired using Hierarchical Phase-Contrast Tomography (HiP-CT)<sup>[see note]</sup>.
 
 ## Preprint
 The associated manuscript is available as a preprint on bioRxiv: https://www.biorxiv.org/content/10.64898/2026.01.27.702076
